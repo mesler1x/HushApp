@@ -15,9 +15,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/main">Main Page</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/user-messages/${currentUserId}">My Messages</a>
-            </li>
+            <#if user??>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user-messages/${currentUserId}">My Messages</a>
+                </li>
+            </#if>
             <#if isAdmin>
                 <li class="nav-item active">
                 <a class="nav-link" href="/user">Users</a>
