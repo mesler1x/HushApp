@@ -4,14 +4,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class ControllerUtils {
     static Map<String, String> getErrors(BindingResult bindingResult) {
-        Map<String, String> map = bindingResult.getFieldErrors().stream().collect(Collectors.toMap(
+        Collector<FieldError, ?, Map<String, String>> collector = Collectors.toMap(
                 fieldError -> fieldError.getField() + "Error",
                 FieldError::getDefaultMessage
-        ));
-        return map;
+        );
+        return bindingResult.getFieldErrors().stream().collect(collector);
     }
 }
